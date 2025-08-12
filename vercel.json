@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "link-tracker-dashboard/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist",
+        "installCommand": "npm install --legacy-peer-deps"
+      }
+    },
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.11"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/link-tracker-dashboard/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "postgresql://<USERNAME>:<PASSWORD>@<HOST>/<DBNAME>?sslmode=require&channel_binding=require",
+    "SECRET_KEY": "<YOUR_SECRET_KEY_HERE>",
+    "DATABASE_TYPE": "postgresql"
+  }
+}
