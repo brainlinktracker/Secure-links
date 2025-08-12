@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "api/index.py",
+      "src": "src/main_vercel.py",
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.11"
@@ -20,7 +20,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "dest": "src/main_vercel.py"
     },
     {
       "src": "/(.*)",
@@ -28,8 +28,9 @@
     }
   ],
   "env": {
-    "DATABASE_URL": "postgresql://<USERNAME>:<PASSWORD>@<HOST>/<DBNAME>?sslmode=require&channel_binding=require",
-    "SECRET_KEY": "<YOUR_SECRET_KEY_HERE>",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_0y9XMKzHCBsN@ep-blue-resonance-add39g5q-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
+    "SECRET_KEY": "sB7u2!fX9#Lp4qZwRvT8&NzM6@eKyC1",
     "DATABASE_TYPE": "postgresql"
   }
 }
+
