@@ -34,12 +34,12 @@ app = Flask(__name__, static_folder='static')
 CORS(app, origins="*")
 
 # Configuration
-SECRET_KEY = os.environ.get("SECRET_KEY", "7th-brain-advanced-link-tracker-secret-2024")
+SECRET_KEY = os.environ.get("SECRET_KEY", "sB7u2!fX9#Lp4qZwRvT8&NzM6@eKyC1")
 app.config['SECRET_KEY'] = SECRET_KEY
 
 # Database configuration
 if DATABASE_TYPE == "postgresql":
-    DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://neondb_owner:npg_WMUsnaL7o3Zp@ep-noisy-recipe-ady497ac-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
+    DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://neondb_owner:npg_0y9XMKzHCBsN@ep-blue-resonance-add39g5q-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
 else:
     DATABASE_PATH = os.path.join(os.path.dirname(__file__), "database", "app.db")
 
@@ -869,6 +869,24 @@ def log_click(tracking_token, email=None, campaign_id=None, user_id=None):
 
 
 # New API Endpoints for Tracking Links and Analytics
+@app.route("/api/tracking-links", methods=["POST"])
+@require_auth
+def create_tracking_link_hyphen():
+    """Create a new tracking link (hyphenated endpoint for frontend compatibility)"""
+    return create_tracking_link()
+
+@app.route("/api/tracking-links", methods=["GET"])
+@require_auth
+def get_tracking_links_hyphen():
+    """Get all tracking links for the current user (hyphenated endpoint for frontend compatibility)"""
+    return get_tracking_links()
+
+@app.route("/api/tracking-events", methods=["GET"])
+@require_auth
+def get_tracking_events_hyphen():
+    """Get all tracking events for the current user's links (hyphenated endpoint for frontend compatibility)"""
+    return get_tracking_events()
+
 @app.route("/api/tracking_links", methods=["POST"])
 @require_auth
 def create_tracking_link():
