@@ -23,6 +23,10 @@
       "dest": "src/main_vercel.py"
     },
     {
+      "src": "/track/(.*)",
+      "dest": "src/main_vercel.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/link-tracker-dashboard/$1"
     }
