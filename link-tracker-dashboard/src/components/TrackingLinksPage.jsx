@@ -310,7 +310,7 @@ const TrackingLinksPage = ({ user, token }) => {
                                 </DialogHeader>
                                 <div className="space-y-4">
                                   <div>
-                                    <label className="text-sm font-medium">Tracking URL</label>
+                                    <label className="text-sm font-medium">Tracking URL (for links)</label>
                                     <div className="flex items-center space-x-2 mt-1">
                                       <Input value={generateTrackingUrl(link.tracking_token)} readOnly className="font-mono text-sm" />
                                       <Button
@@ -323,13 +323,26 @@ const TrackingLinksPage = ({ user, token }) => {
                                     </div>
                                   </div>
                                   <div>
-                                    <label className="text-sm font-medium">Original URL</label>
+                                    <label className="text-sm font-medium">Pixel URL (for emails)</label>
                                     <div className="flex items-center space-x-2 mt-1">
-                                      <Input value={link.original_url} readOnly className="font-mono text-sm" />
+                                      <Input value={`${API_ENDPOINTS.BASE}/pixel/${link.tracking_token}.png`} readOnly className="font-mono text-sm" />
                                       <Button
                                         variant="outline"
                                         size="sm"
-                                        onClick={() => copyToClipboard(link.original_url, 'Original URL')}
+                                        onClick={() => copyToClipboard(`${API_ENDPOINTS.BASE}/pixel/${link.tracking_token}.png`, 'Pixel URL')}
+                                      >
+                                        <Copy className="h-4 w-4" />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <label className="text-sm font-medium">Email Tracking Code</label>
+                                    <div className="flex items-center space-x-2 mt-1">
+                                      <Input value={`<img src="${API_ENDPOINTS.BASE}/pixel/${link.tracking_token}.png" width="1" height="1" style="display:none;" />`} readOnly className="font-mono text-sm" />
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => copyToClipboard(`<img src="${API_ENDPOINTS.BASE}/pixel/${link.tracking_token}.png" width="1" height="1" style="display:none;" />`, 'Email Tracking Code')}
                                       >
                                         <Copy className="h-4 w-4" />
                                       </Button>
